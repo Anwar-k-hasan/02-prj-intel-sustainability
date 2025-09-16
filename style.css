@@ -1,1 +1,330 @@
 /* Add your CSS here */
+
+/* Remove default margins and padding to ensure full width */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif; /* Clean, professional font */
+  background-color: #f8f9fa; /* Light background for contrast */
+}
+
+/* Optional safety belt during debugging */
+html, body {
+  overflow-x: hidden; /* Prevent horizontal scrolling issues */
+}
+
+/* Make header always full width */
+header {
+  width: 100%; /* Use 100% instead of 100vw to prevent overflow */
+  background: linear-gradient(135deg, #0071c5 0%, #00aaff 100%); /* Intel blue gradient */
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box; /* Include any padding/borders in width calculation */
+}
+
+/* Add subtle pattern overlay to header */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><g fill-opacity="0.05"><circle cx="30" cy="30" r="2" fill="white"/></g></svg>');
+  pointer-events: none;
+}
+
+header div {
+  /* Center the content inside the header div */
+  width: 100%; /* Use 100% instead of 100vw to prevent overflow */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px; /* More generous padding */
+  position: relative;
+  z-index: 1; /* Above pattern overlay */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+ 
+/* Enhanced headline styling for hero section */
+header h1 {
+  font-size: 2.5em; /* Larger, more prominent headline */
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add depth */
+}
+
+/* Enhanced subheading styling */
+header p {
+  font-size: 1.1em; /* Slightly larger for better readability */
+  margin: 10px 0 20px 0;
+  text-align: center;
+  max-width: 600px; /* Limit width for better reading */
+  line-height: 1.5;
+  opacity: 0.95; /* Subtle transparency */
+}
+
+/* Enhanced logo styling */
+header div img {
+  padding: 15px;
+  width: 120px; /* Slightly larger Intel logo */
+  display: block; /* Remove extra space below the image */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)); /* Add subtle shadow */
+}
+
+
+/* General section styling - but not for timeline */
+section:not(.timeline) {
+  display: flex;
+  gap: 40px;
+}
+section:not(.timeline) div {
+  border: 3px solid rgba(116, 197, 248, 50); /* Added 'solid' style */
+  border-radius: 5px;
+  max-width: 700px;
+
+}
+
+section h2 {
+  size: 50px;
+}
+
+
+/* Timeline wrapper with fade effects - responsive and clips the fades */
+.timeline-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative; /* Create positioning context for fade effects */
+  width: 100%; /* Responsive instead of fixed 765px */
+  overflow: hidden; /* Prevents pseudo-elements from causing overflow */
+}
+
+/* Transparent fade effect on left edge - stays fixed while content scrolls */
+.timeline-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px; /* Width of fade effect */
+  height: 100%;
+  background: linear-gradient(to right, #f8f9fa, transparent); /* Fade from background color to transparent */
+  z-index: 2; /* Place above cards */
+  pointer-events: none; /* Allow scrolling through the fade */
+}
+
+/* Transparent fade effect on right edge - stays fixed while content scrolls */
+.timeline-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 0; /* Keep inside wrapper instead of -40px */
+  top: 0;
+  width: 40px; /* Match the left fade for symmetry */
+  height: 100%;
+  background: linear-gradient(to left, #f8f9fa, transparent); /* Fade from background color to transparent */
+  z-index: 2; /* Place above cards */
+  pointer-events: none; /* Allow scrolling through the fade */
+}
+
+/* Timeline section styling - responsive by default */
+.timeline {
+  padding: 20px;
+  display: flex; /* Use flexbox for timeline cards */
+  align-items: center; /* Center the cards horizontally */
+  gap: 15px;
+  width: 100%; /* Responsive instead of fixed 765px */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical scrolling */
+  scroll-snap-type: x mandatory; /* Smooth scroll snap effect */
+  position: relative; /* For progress indicator */
+}
+
+/* Add timeline progress line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #0071c5, #00aaff);
+  z-index: 0;
+  transform: translateY(-50%);
+  opacity: 0.3;
+}
+
+/* Enhanced timeline card styling with Intel branding */
+.timeline-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); /* Subtle gradient */
+  border: 2px solid #e3f2fd; /* Light Intel blue border */
+  border-radius: 12px; /* More modern rounded corners */
+  margin: 10px 0; /* Reduced margin for compactness */
+  padding: 20px; /* More generous padding */
+  box-shadow: 0 4px 12px rgba(0, 113, 197, 0.1); /* Intel blue shadow */
+  transition: all 0.3s ease; /* Smooth transitions */
+  width: 300px; /* Set width to make a square */
+  height: 300px; /* Set height to match width for square shape */
+  flex-shrink: 0; /* Prevent cards from shrinking */
+  scroll-snap-align: start; /* Snap alignment for smooth scrolling */
+  cursor: pointer; /* Show it's interactive */
+  position: relative; /* For absolute positioning of details */
+  overflow: hidden; /* Hide overflow content */
+}
+
+/* Add subtle background pattern to cards */
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill-opacity="0.02"><circle cx="20" cy="20" r="1" fill="%230071c5"/></g></svg>');
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content stays above background pattern */
+.timeline-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced hover effect for cards with transforms */
+.timeline-card:hover {
+  transform: translateY(-8px) scale(1.02); /* Lift and slightly scale */
+  box-shadow: 0 12px 24px rgba(0, 113, 197, 0.2); /* Deeper Intel blue shadow */
+  border-color: #0071c5; /* Intel blue border on hover */
+}
+
+/* Add an overlay background when hovered */
+.timeline-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 113, 197, 0.85); /* Intel blue overlay */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Show overlay on hover */
+.timeline-card:hover::after {
+  opacity: 1;
+}
+
+/* Show paragraph text on hover */
+.timeline-card:hover p {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Simple fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Enhanced heading styles with better hierarchy */
+.timeline-card h2 {
+  color: #0071c5; /* Intel blue */
+  font-size: 1.8em; /* Larger for better hierarchy */
+  margin: 0 0 8px 0; /* Reduced margins */
+  font-weight: bold;
+  text-align: center; /* Center the year */
+}
+
+.timeline-card h3 {
+  color: #333;
+  font-size: 1.3em; /* Slightly larger */
+  margin: 0 0 12px 0; /* More space below */
+  font-weight: 600;
+  text-align: center; /* Center the title */
+  border-bottom: 2px solid #e3f2fd; /* Subtle divider */
+  padding-bottom: 8px;
+}
+
+/* Style images within timeline cards */
+.timeline-card img {
+  width: 90%; /* Make image larger to fill more space */
+  height: 120px; /* Taller height for better coverage */
+  object-fit: cover; /* Crop image to fit nicely */
+  border-radius: 8px; /* Rounded corners to match card style */
+  margin: 5px auto; /* Reduce margin for less white space */
+  display: block; /* Make it a block element for centering */
+  border: 2px solid #e3f2fd; /* Light border matching card style */
+  transition: all 0.3s ease; /* Smooth transitions */
+  background-color: #f0f0f0; /* Light gray background as fallback */
+}
+
+/* Hide images on hover to show text overlay */
+.timeline-card:hover img {
+  opacity: 0; /* Hide image when hovering */
+  visibility: hidden; /* Hide image when hovering */
+}
+
+/* Enhanced paragraph styling - hidden initially, shows on hover */
+.timeline-card p {
+  opacity: 0; /* Hidden by default */
+  visibility: hidden; /* Hidden by default */
+  transition: opacity 0.3s ease; /* Smooth transition */
+  color: #fff; /* White text for readability on overlay */
+  position: absolute; /* Position on top */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Perfect centering */
+  width: 85%; /* Keep some padding from edges */
+  text-align: center; /* Center the text */
+  z-index: 2; /* Above overlay background */
+  line-height: 1.5; /* Better line spacing */
+  font-size: 1.1em; /* Larger text size for better readability on hover */
+}
+
+@media (max-width: 480px) {
+  /* Responsive header for mobile */
+  header h1 {
+    font-size: 2em; /* Smaller headline on mobile */
+  }
+  
+  header p {
+    font-size: 1em; /* Smaller paragraph on mobile */
+  }
+  
+  header div img {
+    width: 100px; /* Smaller logo on mobile */
+  }
+  
+  section {
+    flex-direction: column;
+  }
+  
+  /* Make timeline vertical on narrow screens */
+  .timeline {
+    width: 100%; /* Use 100% instead of 100vw to prevent overflow */
+    flex-direction: column; /* Stack cards vertically */
+    overflow-x: visible; /* Remove horizontal scrolling */
+    align-items: center; /* Center the cards */
+  }
+  
+  /* Make timeline wrapper full width on narrow screens */
+  .timeline-wrapper {
+    width: 100%;
+  }
+  
+  /* Remove fade effects on narrow screens */
+  .timeline-wrapper::before,
+  .timeline-wrapper::after {
+    display: none; /* Hide fade effects on mobile */
+  }
+  
+  /* Center timeline cards on narrow screens */
+  .timeline-card {
+    margin: 10px auto; /* Center cards horizontally */
+  }
+}
